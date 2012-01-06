@@ -41,4 +41,5 @@ export IRCLOG_LOGS_DIR=\$ENV_DIR/logs/
 export IRCLOG_PIDS_DIR=\$ENV_DIR/pids/
 " > dist/bin/env.sh
 
-chmod +X dist/bin/env.sh
+chmod +x dist/bin/env.sh
+
