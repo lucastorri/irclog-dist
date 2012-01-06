@@ -1,6 +1,9 @@
 #!/bin/bash
 
-updateProject() {
+cd `dirname "$0"`
+DIR=`pwd`
+
+updateAndDist() {
 	PROJECT=$1
 	
 	if [ -d $PROJECT ]
@@ -14,28 +17,28 @@ updateProject() {
 	
 	cd $PROJECT
 	./dist.sh
-	unzip dist/`ls -1 dist | grep .zip` -d $DIR/dist
+	ZIP_FILE=`ls -1 dist | grep .zip`
+	unzip dist/$ZIP_FILE -d $DIR/dist
 	cd -
 }
 
-DIR=`dirname "$0"`
-cd DIR
+cd $DIR
 rm -rf dist
 mkdir dist
 
-updateAndDist("ircbot")
-updateAndDist("reindxr")
-updateAndDist("irclog")
+updateAndDist "ircbot"
+updateAndDist "reindxr"
+updateAndDist "irclog"
 
 echo "#!/bin/bash
 
 ENV_DIR=\`basename \"\$0\"\`
 
-export JAVA_HOME=\${readlink \`which java\`}
+export JAVA_HOME=\${readlink \`which java\`}/../
 export IRCLOG_DATA_DIR=\$ENV_DIR/data/
 export IRCLOG_INDEX_DIR=\$ENV_DIR/index/
 export IRCLOG_LOGS_DIR=\$ENV_DIR/logs/
 export IRCLOG_PIDS_DIR=\$ENV_DIR/pids/
-"
+" > dist/bin/env.sh
 
- > dist/env.sh
+chmod +X dist/bin/env.sh
