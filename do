@@ -24,7 +24,7 @@ updateAndDist() {
 	./dist.sh
 	ZIP_FILE=`ls -1 dist | grep .zip`
 	unzip dist/$ZIP_FILE -d $DIR/dist
-	cd $PWD
+	cd $DIR
 	
 	echo "#########################"
 	echo "#########################"
