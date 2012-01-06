@@ -5,6 +5,11 @@ DIR=`pwd`
 
 updateAndDist() {
 	PROJECT=$1
+	echo
+	echo "#########################"
+	echo " $PROJECT "
+	echo "#########################"
+	echo
 	
 	if [ -d $PROJECT ]
 	then
@@ -20,6 +25,9 @@ updateAndDist() {
 	ZIP_FILE=`ls -1 dist | grep .zip`
 	unzip dist/$ZIP_FILE -d $DIR/dist
 	cd -
+	
+	echo "#########################"
+	echo "#########################"
 }
 
 cd $DIR
