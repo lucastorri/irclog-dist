@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PROJECTS=${@:-"ircbot reindxr irclog"}
+
 cd `dirname "$0"`
 DIR=`pwd`
 
@@ -34,9 +36,10 @@ cd $DIR
 rm -rf dist
 mkdir -p dist/{bin,data,index,logs,pids}
 
-updateAndDist "ircbot"
-updateAndDist "reindxr"
-updateAndDist "irclog"
+for p in $PROJECTS
+do
+	updateAndDist "$p"
+done
 
 cd $DIR
 echo "#!/bin/bash
